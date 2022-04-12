@@ -189,3 +189,23 @@
 
   app.init();
 }
+
+
+object = {
+  funkcja: function(){
+    console.log(this);
+  },
+  trzeciafunkcja: function(){
+    console.log(this)
+  },
+  init: {
+    a: 1,
+    b: 2,
+    c: function(){console.log(this)}
+  },
+  czwartaFunkcja: function(){console.log(this)}
+};
+
+
+object.trzeciafunkcja();
+// object.init.c();
