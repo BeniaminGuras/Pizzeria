@@ -192,15 +192,15 @@
       console.log('klikniete');
       if(newValue !== thisWidget.value && !isNaN(newValue)){
         thisWidget.value = newValue;
-        thisWidget.input.value = thisWidget.value;
       }
+      thisWidget.input.value = thisWidget.value;
     }
 
     widgetActions(){
-      const thisWidget = this; 
+      const thisWidget = this;
       thisWidget.input.addEventListener('change', function(){thisWidget.setValue(thisWidget.input.value)});
-      thisWidget.linkDecrease.addEventListener('click', function(){thisWidget.setValue(thisWidget.input.value-1)});
-      thisWidget.linkIncrease.addEventListener('click', function(){thisWidget.setValue(thisWidget.input.value++)});
+      thisWidget.linkDecrease.addEventListener('click', function(){thisWidget.setValue(thisWidget.input.value - 1)});
+      thisWidget.linkIncrease.addEventListener('click', function(){thisWidget.setValue(parseInt(thisWidget.input.value)+1)});
     }
 
   }
