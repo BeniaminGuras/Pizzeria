@@ -167,7 +167,7 @@
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       thisProduct.amountWidgetElem.addEventListener('updated', function(){
         thisProduct.processOrder();
-      })
+      });
     }
   }
 
@@ -205,9 +205,9 @@
 
     widgetActions(){
       const thisWidget = this;
-      thisWidget.input.addEventListener('change', function(){thisWidget.setValue(thisWidget.input.value)});
-      thisWidget.linkDecrease.addEventListener('click', function(){thisWidget.setValue(thisWidget.input.value - 1)});
-      thisWidget.linkIncrease.addEventListener('click', function(){thisWidget.setValue(parseInt(thisWidget.input.value)+1)});
+      thisWidget.input.addEventListener('change', function(){thisWidget.setValue(thisWidget.input.value);});
+      thisWidget.linkDecrease.addEventListener('click', function(){thisWidget.setValue(thisWidget.input.value - 1);});
+      thisWidget.linkIncrease.addEventListener('click', function(){thisWidget.setValue(parseInt(thisWidget.input.value)+1);});
     }
 
     announce(){
