@@ -149,6 +149,7 @@
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
     }
 
@@ -188,6 +189,7 @@
           }
         }
       }
+      thisProduct.priceSingle = price; 
       price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
@@ -198,6 +200,43 @@
       thisProduct.amountWidgetElem.addEventListener('updated', function(){
         thisProduct.processOrder();
       });
+    }
+
+    addToCart(){
+      const thisProduct = this;
+      app.cart.add(thisProduct.prepareCartProduct());
+    }
+
+    prepareCartProduct(){
+      const thisProduct = this;
+      const productSummary = {};
+      productSummary.id = thisProduct.id;
+      productSummary.name = thisProduct.data.name;
+      productSummary.amount = thisProduct.amountWidget.value;
+      productSummary.priceSingle = thisProduct.priceSingle; 
+      productSummary.price = thisProduct.priceSingle * productSummary.amount;
+      productSummary.params = thisProduct.prepareCartProductParams();
+      return productSummary;
+    }
+
+    prepareCartProductParams(){
+      const thisProduct = this;
+      const cartParams = {};
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData', formData);
+  
+      for(let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+        cartParams[paramId] = {};
+        cartParams[paramId].label = param.label;
+        cartParams[paramId].options = {};
+        for(let optionId in param.options){
+          if(formData[paramId] && formData[paramId].includes(optionId)){
+            cartParams[paramId].options[optionId] = param.options[optionId].label;
+          }
+        }
+      }
+      return cartParams;
     }
   }
 
@@ -261,6 +300,7 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     }
 
     initActions(){
@@ -269,6 +309,14 @@
         this.closest(select.containerOf.cart).classList.toggle(classNames.cart.wrapperActive);
       });
     }
+    
+    add(menuProduct){
+      const thisCart = this; 
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
+    }
+
   }
 
   const app = {
