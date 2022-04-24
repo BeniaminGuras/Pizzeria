@@ -3,6 +3,14 @@ import Product from './componenets/product.js';
 import Cart from './componenets/Cart.js';
 
 const app = {
+  initPages: function(){
+    const thisApp = this;
+
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+
+    thisApp.activatePage(thisApp.pages[0].id);
+  },
+
   initMenu: function(){
     const thisApp = this;
     for(let productData in thisApp.data.products){
@@ -41,6 +49,7 @@ const app = {
     
   init: function(){
     const thisApp = this;
+    thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
   },
