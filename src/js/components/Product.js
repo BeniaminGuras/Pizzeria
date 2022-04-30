@@ -132,7 +132,7 @@ class Product{
     const productSummary = {};
     productSummary.id = thisProduct.id;
     productSummary.name = thisProduct.data.name;
-    productSummary.amount = thisProduct.amountWidget.value;
+    productSummary.amount = thisProduct.amountWidget.correctValue;
     productSummary.priceSingle = thisProduct.priceSingle; 
     productSummary.price = thisProduct.priceSingle * productSummary.amount;
     productSummary.params = thisProduct.prepareCartProductParams();

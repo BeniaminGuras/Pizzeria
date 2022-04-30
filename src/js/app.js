@@ -1,7 +1,7 @@
 import {settings, select, classNames} from './settings.js';
-import Product from './componenets/product.js';
-import Cart from './componenets/Cart.js';
-import Booking from './componenets/Booking.js';
+import Product from './components/product.js';
+import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 
 const app = {
   initPages: function(){
@@ -69,7 +69,6 @@ const app = {
         return rawResponse.json();
       })
       .then(function(parasedResponse){
-        console.log('parasedResponse', parasedResponse);
         thisApp.data.products = parasedResponse;
         thisApp.initMenu();
       });
