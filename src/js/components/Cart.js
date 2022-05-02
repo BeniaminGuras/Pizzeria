@@ -58,18 +58,27 @@ class Cart{
     thisCart.totalNumber = 0; 
     thisCart.subtotalPrice = 0; 
 
-    for(let product of thisCart.products){
-      thisCart.totalNumber += product.amount;
-      thisCart.subtotalPrice += product.price;
-    }
-    if(thisCart.totalNumber > 0){
-      thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
-      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-      for(let totalPriceElem of thisCart.dom.totalPrice){
-        totalPriceElem.innerHTML = thisCart.totalPrice;
+    if(thisCart.products.length > 0){
+      for(let product of thisCart.products){
+        thisCart.totalNumber += product.amount;
+        thisCart.subtotalPrice += product.price;
       }
-      thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+      if(thisCart.totalNumber > 0){
+        thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
+        thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+        for(let totalPriceElem of thisCart.dom.totalPrice){
+          totalPriceElem.innerHTML = thisCart.totalPrice;
+        }
+        thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+        thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+      }
+    } else { 
+      thisCart.dom.subtotalPrice.innerHTML = '0';
+      thisCart.dom.totalNumber.innerHTML = '0';
+      thisCart.dom.deliveryFee.innerHTML = '0';
+      for(let totalPriceElem of thisCart.dom.totalPrice){
+        totalPriceElem.innerHTML = '0';
+      }
     }
   }
 
