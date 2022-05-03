@@ -155,7 +155,11 @@ class Booking{
       const clicked = event.target;
       const classOfClicked = clicked.getAttribute('class');
       if(classOfClicked.indexOf('table') != -1){
-        thisBooking.selectTable(clicked);
+        if(classOfClicked.indexOf('booked') == -1){
+          thisBooking.selectTable(clicked);
+        } else {
+          alert('Ten stolik jest zajety');
+        }
       }
     });
   }
