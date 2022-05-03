@@ -7,6 +7,7 @@ import HourPicker from './Classes_v2/HourPicker.js';
 class Booking{
   constructor(element) {
     this.render(element);
+    this.initActions();
     this.initWidgets();
     this.getData();
   }
@@ -134,6 +135,10 @@ class Booking{
     this.dom.datePicker = element.querySelector(select.widgets.amount.datePicker.wrapper);
     this.dom.tables = this.dom.wrapper.querySelectorAll(select.booking.tables);
     this.dom.tableWrapper = this.dom.wrapper.querySelector(select.booking.floorPlan);
+    this.dom.starters = this.dom.wrapper.querySelectorAll(select.booking.starters);
+    this.dom.phone = this.dom.wrapper.querySelector(select.booking.phone);
+    this.dom.address = this.dom.wrapper.querySelector(select.booking.address);
+    this.dom.confrimationButton = this.dom.wrapper.querySelector(select.booking.submit);
   }
 
   initWidgets(){
@@ -151,17 +156,7 @@ class Booking{
       thisBooking.restartSelected();
     });
     
-    this.dom.tableWrapper.addEventListener('click', function(event){
-      const clicked = event.target;
-      const classOfClicked = clicked.getAttribute('class');
-      if(classOfClicked.indexOf('table') != -1){
-        if(classOfClicked.indexOf('booked') == -1){
-          thisBooking.selectTable(clicked);
-        } else {
-          alert('Ten stolik jest zajety');
-        }
-      }
-    });
+   
   }
 
   selectTable(table){
@@ -182,6 +177,60 @@ class Booking{
     for(let table of this.dom.tables){
       table.classList.remove(classNames.booking.tableReadyToBeBooked);
     }
+  }
+
+  prepareReservation(){
+    const thisBooking = this;
+    const summary = {};
+    const listOfStarters = [];
+
+    for(let starter of this.dom.starters){
+      const element = starter.querySelector('input');
+      if(element.checked){
+        listOfStarters.push(element.getAttribute('value'));
+      }
+    }
+
+    summary.date = thisBooking.datePicker.correctValue;
+    summary.hour = thisBooking.timePicker.correctValue;
+    summary.duration  = thisBooking.hoursAmount.correctValue;
+    summary.people = thisBooking.peopleAmount.correctValue;
+    summary.table = thisBooking.activeTable[0];
+    summary.phone = this.dom.phone.value;
+    summary.address = this.dom.address.value;
+    summary.starters = listOfStarters;
+    return summary; 
+  }
+
+  initActions(){
+    const thisBooking = this; 
+
+    this.dom.tableWrapper.addEventListener('click', function(event){
+      const clicked = event.target;
+      const classOfClicked = clicked.getAttribute('class');
+      if(classOfClicked.indexOf('table') != -1){
+        if(classOfClicked.indexOf('booked') == -1){
+          thisBooking.selectTable(clicked);
+        } else {
+          alert('Ten stolik jest zajety');
+        }
+      }
+    });
+
+    this.dom.confrimationButton.addEventListener('click', function(event){
+      event.preventDefault();
+      const url = settings.db.url + '/' + settings.db.booking;
+      const payload = thisBooking.prepareReservation();
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+      fetch(url, options);
+    });
   }
 }
 
