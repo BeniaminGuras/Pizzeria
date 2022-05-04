@@ -5,7 +5,8 @@ $transition: 0.75s;
         background-color: #fff;
     }
 }
-.menu {
+
+.menu{
     width: 650px;
     margin-top: 50px;
     padding-top: 50px;
@@ -35,7 +36,7 @@ $transition: 0.75s;
             span{
                 position: absolute;
                 z-index: 100;
-                color:#fff;
+                color: #fff;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
@@ -54,7 +55,7 @@ $transition: 0.75s;
         background-color: #ff6b6b;
         border: #ff6b6b, solid;
         border-radius: 4px;
-        color:#fff;
+        color: #fff;
         
         h1{
             text-align: center;
@@ -122,7 +123,8 @@ $transition: 0.75s;
                 border-radius: 4px;
                 z-index: 100;
             }
-            .icon {
+
+            .icon{
                 position: absolute;
                 top: 50%;
                 left: 35%;
@@ -139,7 +141,7 @@ $transition: 0.75s;
 
             .icon:hover {
                 display: block;
-                color:#ff6b6b;
+                color: #ff6b6b;
                 font-size: 40px;
                 transition: $transition;
             }
@@ -171,15 +173,18 @@ $transition: 0.75s;
     .bottom-row{
         display: flex;
         justify-content: space-between;
+        
         div {
             flex-basis: 32%;
             position: relative;
+            
             img{
                 width: 100%;
                 height: 250px;
                 object-fit: cover;
                 border-radius: 4px;
             }
+            
             .icon {
                 position: absolute;
                 top: 50%;
@@ -197,7 +202,7 @@ $transition: 0.75s;
 
             .icon:hover {
                 font-size: 40px;
-                color:#ff6b6b;
+                color: #ff6b6b;
                 transition: $transition;
             }
 

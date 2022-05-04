@@ -102,17 +102,16 @@ const app = {
     const thisApp = this;
     const dom = {};
     dom.links = document.querySelector(select.home.linksOnHomePage);
-    dom.pages = document.querySelector(select.containerOf.pages).children;
     dom.links.addEventListener('click', function(event){
       event.preventDefault();
       const clicked = event.target;
       console.log(clicked.tagName);
 
       if(clicked.tagName == 'IMG' || clicked.tagName == 'SPAN'){
-        const link = clicked.closest('a')
+        const link = clicked.closest('a');
         let clickedAttribute = link.getAttribute('href');
         clickedAttribute = clickedAttribute.replace('#', '');
-        for(let page of dom.pages){
+        for(let page of thisApp.pages){
           if(clickedAttribute == page.id){
             thisApp.activatePage(clickedAttribute);
           }

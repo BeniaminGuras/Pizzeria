@@ -1,8 +1,8 @@
 import AmountWidget from './AmountWidget.js';
 import {templates, select, settings, classNames} from '../settings.js';
 import {utils} from '../utils.js';
-import DatePicker from './Classes_v2/DatePicker.js';
-import HourPicker from './Classes_v2/HourPicker.js';
+import DatePicker from './DatePicker.js';
+import HourPicker from './HourPicker.js';
 
 class Booking{
   constructor(element) {
