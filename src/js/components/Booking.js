@@ -230,6 +230,7 @@ class Booking{
         body: JSON.stringify(payload),
       };
       fetch(url, options);
+      thisBooking.makeBooked();
     });
   }
 }

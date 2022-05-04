@@ -87,6 +87,39 @@ const app = {
       app.cart.add(event.detail.product);
     });
   },
+
+  initCarousel: function(){
+    const wrapper = document.querySelector('.carousel');
+    // eslint-disable-next-line no-undef
+    new Flickity(wrapper, {
+      cellAlign: 'left',
+      contain: true,
+      autoPlay: true,
+    });
+  },
+
+  initActionsForHomeLinks: function(){
+    const thisApp = this;
+    const dom = {};
+    dom.links = document.querySelector(select.home.linksOnHomePage);
+    dom.pages = document.querySelector(select.containerOf.pages).children;
+    dom.links.addEventListener('click', function(event){
+      event.preventDefault();
+      const clicked = event.target;
+      console.log(clicked.tagName);
+
+      if(clicked.tagName == 'IMG' || clicked.tagName == 'SPAN'){
+        const link = clicked.closest('a')
+        let clickedAttribute = link.getAttribute('href');
+        clickedAttribute = clickedAttribute.replace('#', '');
+        for(let page of dom.pages){
+          if(clickedAttribute == page.id){
+            thisApp.activatePage(clickedAttribute);
+          }
+        }
+      }
+    });
+  },
     
   init: function(){
     const thisApp = this;
@@ -94,7 +127,10 @@ const app = {
     thisApp.initData();
     thisApp.initBooking();
     thisApp.initCart();
+    thisApp.initCarousel();
+    thisApp.initActionsForHomeLinks();
   },
+
 };
 
 app.init();

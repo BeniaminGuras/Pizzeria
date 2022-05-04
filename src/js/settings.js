@@ -71,7 +71,9 @@ export const select = {
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
-  // CODE ADDED END
+  home: {
+    linksOnHomePage: '.upper-menu',
+  }
 };
   
 export const classNames = {
