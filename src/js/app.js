@@ -105,9 +105,7 @@ const app = {
     dom.links.addEventListener('click', function(event){
       event.preventDefault();
       const clicked = event.target;
-      console.log(clicked.tagName);
-
-      if(clicked.tagName == 'IMG' || clicked.tagName == 'SPAN'){
+      if(clicked.offsetParent.tagName == 'A'){
         const link = clicked.closest('a');
         let clickedAttribute = link.getAttribute('href');
         clickedAttribute = clickedAttribute.replace('#', '');
