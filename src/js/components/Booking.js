@@ -92,7 +92,7 @@ class Booking{
       }
       thisBooking.booked[date][i].push(table);
     }
-    thisBooking.updateDOM;
+    thisBooking.updateDOM();
     thisBooking.restartSelected();
   }
 
